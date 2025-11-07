@@ -11,9 +11,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(to right, #A2C2F5, #FFD767);
   color: #333;
+  padding-bottom: 60px; /* Ruang untuk footer */
 }
 
 /* Container chatbot */
@@ -28,6 +29,7 @@ body {
   flex-direction: column;
   overflow: hidden;
   animation: fadeIn 0.6s ease-out;
+  margin-bottom: 20px; /* Ruang antara chatbot dan footer */
 }
 
 /* Header */
@@ -184,9 +186,18 @@ body {
 }
 
 /* Animasi */
-@keyframes fadeIn {0% { opacity: 0; } 100% { opacity: 1; }}
-@keyframes slideIn {0% { transform: translateX(20px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; }}
-@keyframes typingIn {0% { opacity: 0; } 100% { opacity: 1; }}
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes slideIn {
+  0% { transform: translateX(20px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+@keyframes typingIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
 
 /* ================== */
 /* Styling list fakultas/prodi agar numbering rata */
@@ -210,4 +221,89 @@ body {
 
 .fakultas-list li ul li {
   line-height: 1.5;
+}
+
+/* ================== */
+/* Support Info di kiri bawah */
+#support-info {
+  position: fixed;
+  bottom: 10px;
+  left: 15px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+  line-height: 1.4;
+  font-family: 'Segoe UI', sans-serif;
+  transition: all 0.3s ease;
+}
+
+#support-info:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+/* ================== */
+/* Footer Styles */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to right, #1D4ED8, #2563EB);
+  color: white;
+  padding: 12px 20px;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.footer-contact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-contact i {
+  font-size: 16px;
+}
+
+.footer-contact a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-contact a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive untuk footer */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .footer {
+    padding: 10px 15px;
+    font-size: 13px;
+  }
+  
+  body {
+    padding-bottom: 50px; /* Sesuaikan dengan tinggi footer di mobile */
+  }
 }

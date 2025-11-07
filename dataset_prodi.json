@@ -1,0 +1,126 @@
+{
+  "judul": "Data Program Studi di Universitas Diponegoro",
+  "dataset_prodi": [
+    {
+      "fakultas": "Fakultas Hukum",
+      "program_studi": ["S1 Hukum"]
+    },
+    {
+      "fakultas": "Fakultas Ekonomika dan Bisnis",
+      "program_studi": [
+        "S1 Akuntansi",
+        "S1 Ilmu Ekonomi",
+        "S1 Manajemen",
+        "S1 Ekonomi Islam",
+        "S1 Bisnis Digital"
+      ]
+    },
+    {
+      "fakultas": "Fakultas Ilmu Budaya",
+      "program_studi": [
+        "S1 Sastra Inggris",
+        "S1 Sastra Indonesia",
+        "S1 Sejarah",
+        "S1 Ilmu Perpustakaan",
+        "S1 Antropologi Sosial",
+        "S1 Bahasa dan Kebudayaan Jepang"
+      ]
+    },
+    {
+      "fakultas": "Fakultas Ilmu Sosial dan Ilmu Politik",
+      "program_studi": [
+        "S1 Administrasi Publik",
+        "S1 Administrasi Bisnis",
+        "S1 Ilmu Pemerintahan",
+        "S1 Ilmu Komunikasi",
+        "S1 Hubungan Internasional"
+      ]
+    },
+    {
+      "fakultas": "Fakultas Kedokteran",
+      "program_studi": [
+        "S1 Kedokteran dan Profesi Dokter",
+        "S1 Ilmu Gizi",
+        "S1 Keperawatan dan Profesi Ners",
+        "S1 Farmasi",
+        "S1 Kedokteran Gigi dan Profesi Dokter Gigi"
+      ]
+    },
+    {
+      "fakultas": "Fakultas Kesehatan Masyarakat",
+      "program_studi": [
+        "S1 Kesehatan Masyarakat",
+        "S1 Keselamatan dan Kesehatan Kerja"
+      ]
+    },
+    {
+      "fakultas": "Fakultas Perikanan dan Ilmu Kelautan",
+      "program_studi": [
+        "S1 Akuakultur",
+        "S1 Ilmu Kelautan",
+        "S1 Manajemen Sumberdaya Perairan",
+        "S1 Oseanografi",
+        "S1 Perikanan Tangkap",
+        "S1 Teknologi Hasil Perikanan"
+      ]
+    },
+    {
+      "fakultas": "Fakultas Peternakan dan Pertanian",
+      "program_studi": [
+        "S1 Peternakan",
+        "S1 Agribisnis",
+        "S1 Agroekoteknologi",
+        "S1 Teknologi Pangan"
+      ]
+    },
+    {
+      "fakultas": "Fakultas Psikologi",
+      "program_studi": ["S1 Psikologi"]
+    },
+    {
+      "fakultas": "Fakultas Sains dan Matematika",
+      "program_studi": [
+        "S1 Matematika",
+        "S1 Biologi",
+        "S1 Kimia",
+        "S1 Fisika",
+        "S1 Statistika",
+        "S1 Bioteknologi",
+        "S1 Informatika"
+      ]
+    },
+    {
+      "fakultas": "Fakultas Teknik",
+      "program_studi": [
+        "S1 Teknik Sipil",
+        "S1 Arsitektur",
+        "S1 Teknik Kimia",
+        "S1 Teknik Mesin",
+        "S1 Teknik Elektro",
+        "S1 Perencanaan Wilayah dan Kota",
+        "S1 Teknik Industri",
+        "S1 Teknik Lingkungan",
+        "S1 Teknik Perkapalan",
+        "S1 Teknik Geodesi",
+        "S1 Teknik Geologi",
+        "S1 Teknik Komputer"
+      ]
+    },
+    {
+      "fakultas": "Sekolah Vokasi",
+      "program_studi": [
+        "Program Studi Sarjana Terapan Teknik Infrastruktur Sipil dan Perencanaan Arsitektur",
+        "Program Studi Sarjana Terapan Perencanaan Tata Ruang dan Pertanahan",
+        "Program Studi Sarjana Terapan Teknologi Rekayasa Kimia Industri",
+        "Program Studi Sarjana Terapan Rekayasa Perancangan Mekanik",
+        "Program Studi Sarjana Terapan Teknologi Rekayasa Otomasi",
+        "Program Studi Sarjana Terapan Teknologi Rekayasa Konstruksi Perkapalan",
+        "Program Studi Sarjana Terapan Teknik Listrik Industri",
+        "Program Studi Sarjana Terapan Akuntansi Perpajakan",
+        "Program Studi Sarjana Terapan Manajemen dan Administrasi Logistik",
+        "Program Studi Sarjana Terapan Bahasa Asing Terapan",
+        "Program Studi Sarjana Terapan Informasi dan Hubungan Masyarakat"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "judul": "Data Fakultas Universitas Diponegoro",
+  "data_fakultas": [
+    {
+      "nama_fakultas": "Fakultas Hukum",
+      "link": "https://fh.undip.ac.id/"
+    },
+    {
+      "nama_fakultas": "Fakultas Ekonomika dan Bisnis",
+      "link": "https://feb.undip.ac.id/"
+    },
+    {
+      "nama_fakultas": "Fakultas Ilmu Budaya",
+      "link": "https://fib.undip.ac.id/"
+    },
+    {
+      "nama_fakultas": "Fakultas Ilmu Sosial dan Ilmu Politik",
+      "link": "https://fisip.undip.ac.id/"
+    },
+    {
+      "nama_fakultas": "Fakultas Kedokteran",
+      "link": "https://fk.undip.ac.id/"
+    },
+    {
+      "nama_fakultas": "Fakultas Kesehatan Masyarakat",
+      "link": "https://fkm.undip.ac.id/"
+    },
+    {
+      "nama_fakultas": "Fakultas Perikanan dan Ilmu Kelautan",
+      "link": "https://fpik.undip.ac.id/"
+    },
+    {
+      "nama_fakultas": "Fakultas Peternakan dan Pertanian",
+      "link": "https://fpp.undip.ac.id/"
+    },
+    {
+      "nama_fakultas": "Fakultas Psikologi",
+      "link": "https://psikologi.undip.ac.id/"
+    },
+    {
+      "nama_fakultas": "Fakultas Sains dan Matematika",
+      "link": "https://fsm.undip.ac.id/"
+    },
+    {
+      "nama_fakultas": "Fakultas Teknik",
+      "link": "https://ft.undip.ac.id/"
+    },
+    {
+      "nama_fakultas": "Sekolah Vokasi",
+      "link": "https://vokasi.undip.ac.id/"
+    }
+  ]
+}

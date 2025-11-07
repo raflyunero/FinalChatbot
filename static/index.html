@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="Chatbot Akademik Universitas Diponegoro (UNDIP) untuk layanan akademik, fakultas, prodi, jadwal kuliah, dan informasi kampus.">
-    <title>Chatbot Akademik UNDIP</title>
+    <title>Chatbot Akademik TEKKOM</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Tambahkan library marked.js untuk konversi Markdown ke HTML -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -22,6 +22,8 @@
             --bot-message-bg: #ffffff;
             --border-radius: 12px;
             --transition: all 0.3s ease;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
         }
 
         * {
@@ -59,8 +61,13 @@
             align-items: center;
             justify-content: center;
             margin-right: 20px;
-            color: var(--primary-color);
-            font-size: 28px;
+            overflow: hidden;
+        }
+
+        .header-logo img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
         }
 
         .header-title {
@@ -186,6 +193,15 @@
             background-color: var(--background-color);
         }
 
+        .feature-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .feature-item.disabled:hover {
+            background-color: transparent;
+        }
+
         .feature-icon {
             width: 36px;
             height: 36px;
@@ -229,6 +245,7 @@
             border-bottom: 1px solid #eee;
             display: flex;
             align-items: center;
+            justify-content: space-between;
         }
 
         .chat-status {
@@ -247,6 +264,40 @@
 
         .status-dot.offline {
             background-color: #F44336;
+        }
+
+        .status-dot.warning {
+            background-color: var(--warning-color);
+        }
+
+        .session-timer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--light-text);
+        }
+
+        .timer-progress {
+            width: 100px;
+            height: 6px;
+            background-color: #eee;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .timer-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            transition: width 1s linear;
+        }
+
+        .timer-bar.warning {
+            background-color: var(--warning-color);
+        }
+
+        .timer-bar.danger {
+            background-color: var(--danger-color);
         }
 
         .chat-body {
@@ -300,6 +351,17 @@
             border-color: var(--primary-color);
         }
 
+        .quick-action.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quick-action.disabled:hover {
+            background-color: white;
+            color: var(--primary-color);
+            border-color: rgba(0, 102, 51, 0.2);
+        }
+
         .message {
             margin-bottom: 20px;
             display: flex;
@@ -317,6 +379,21 @@
 
         .message.bot {
             justify-content: flex-start;
+        }
+
+        .message.system {
+            justify-content: center;
+        }
+
+        .message.system .message-content {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--light-text);
+            font-style: italic;
+            font-size: 14px;
+            padding: 8px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            text-align: center;
         }
 
         .message-avatar {
@@ -412,6 +489,17 @@
             border-color: var(--primary-color);
         }
 
+        .quick-reply.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quick-reply.disabled:hover {
+            background-color: white;
+            color: var(--primary-color);
+            border-color: #ddd;
+        }
+
         .typing-indicator {
             display: none;
             padding: 15px;
@@ -450,6 +538,7 @@
             border-top: 1px solid #eee;
             display: flex;
             background-color: white;
+            align-items: center;
         }
 
         .chat-input {
@@ -464,6 +553,12 @@
 
         .chat-input:focus {
             border-color: var(--primary-color);
+        }
+
+        .chat-input:disabled {
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+            opacity: 0.7;
         }
 
         .chat-send {
@@ -487,25 +582,58 @@
             transform: scale(1.05);
         }
 
-        .chat-attach {
-            background: none;
-            border: none;
-            color: #999;
-            font-size: 20px;
-            cursor: pointer;
-            margin-right: 10px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
+        .chat-send:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
 
-        .chat-attach:hover {
-            background-color: #f1f1f1;
-            color: var(--primary-color);
+        .session-ended-banner {
+            background-color: rgba(244, 67, 54, 0.1);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--danger-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .session-ended-icon {
+            color: var(--danger-color);
+            font-size: 24px;
+        }
+
+        .session-ended-content {
+            flex: 1;
+        }
+
+        .session-ended-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--danger-color);
+        }
+
+        .session-ended-subtitle {
+            font-size: 14px;
+            color: var(--light-text);
+        }
+
+        .restart-session-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .restart-session-btn:hover {
+            background-color: var(--primary-dark);
         }
 
         /* Chat Widget (same as before) */
@@ -579,6 +707,7 @@
             padding: 15px;
             border-top: 1px solid #eee;
             display: flex;
+            align-items: center;
         }
 
         .chat-popup-input {
@@ -587,6 +716,12 @@
             border-radius: 20px;
             padding: 10px 15px;
             outline: none;
+        }
+
+        .chat-popup-input:disabled {
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+            opacity: 0.7;
         }
 
         .chat-popup-send {
@@ -603,10 +738,53 @@
             justify-content: center;
         }
 
+        .chat-popup-send:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
         /* Style untuk teks bold dalam pesan bot di widget */
         .chat-popup-body .message.bot .message-content strong {
             font-weight: 700;
             color: var(--primary-color);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            font-size: 14px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-contact i {
+            font-size: 16px;
+        }
+
+        .footer-contact a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-contact a:hover {
+            text-decoration: underline;
         }
 
         /* Responsive */
@@ -628,6 +806,15 @@
             .message-content-wrapper {
                 max-width: 90%;
             }
+            
+            .session-timer {
+                display: none;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 8px;
+            }
         }
 
         /* Accessibility */
@@ -648,7 +835,7 @@
     <!-- Header -->
     <div class="header">
         <div class="header-logo">
-            <i class="fas fa-university"></i>
+            <img src="logo.png" alt="UNDIP Logo">
         </div>
         <div class="header-title">
             <h1>Chatbot Akademik UNDIP</h1>
@@ -673,12 +860,12 @@
                 <div class="sidebar-section-title">Tentang Chatbot</div>
                 <div class="info-card">
                     <div class="info-card-title">Chatbot Akademik UNDIP</div>
-                    <div class="info-card-content">Asisten virtual yang siap membantu Anda dengan informasi seputar akademik di Universitas Diponegoro.</div>
+                    <div class="info-card-content">Asisten virtual oleh TEKKOM yang siap membantu Anda dengan informasi seputar akademik di Universitas Diponegoro.</div>
                 </div>
             </div>
             
             <div class="sidebar-section">
-                <div class="sidebar-section-title">Fitur Utama</div>
+                <div class="sidebar-section-title">PALING SERING DITANYAKAN</div>
                 <div class="feature-list">
                     <div class="feature-item" onclick="sendQuickMessage('Informasi pendaftaran mahasiswa baru')">
                         <div class="feature-icon">
@@ -740,6 +927,12 @@
                     <span class="status-dot" id="statusDot"></span>
                     <span id="statusText">Chatbot Akademik UNDIP - Online</span>
                 </div>
+                <div class="session-timer">
+                    <span id="timerText">Sesi aktif</span>
+                    <div class="timer-progress">
+                        <div class="timer-bar" id="timerBar"></div>
+                    </div>
+                </div>
             </div>
             
             <div class="chat-body" id="chatBody">
@@ -782,13 +975,28 @@
             </div>
             
             <div class="chat-input-container">
-                <button class="chat-attach" id="chatAttach" aria-label="Lampiran">
-                    <i class="fas fa-paperclip"></i>
-                </button>
                 <input type="text" class="chat-input" id="chatInput" placeholder="Ketik pesan..." aria-label="Ketik pesan">
                 <button class="chat-send" id="chatSend" aria-label="Kirim pesan">
                     <i class="fas fa-paper-plane"></i>
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-contact">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>Found an error? Contact our support.</span>
+            </div>
+            <div class="footer-contact">
+                <i class="fas fa-phone"></i>
+                <a href="tel:081575737927">081575737927</a>
+            </div>
+            <div class="footer-contact">
+                <i class="fas fa-user"></i>
+                <span>RAFLY</span>
             </div>
         </div>
     </div>
@@ -847,11 +1055,140 @@
             const statusDot = document.getElementById('statusDot');
             const statusText = document.getElementById('statusText');
             
+            // Timer elements
+            const timerText = document.getElementById('timerText');
+            const timerBar = document.getElementById('timerBar');
+            
+            // Session timeout variables
+            let sessionTimeout;
+            let sessionTimeLeft = 120 // 70 seconds
+            let sessionActive = true;
+            let sessionTimerInterval;
+            
+            // Initialize session timer
+            function startSessionTimer() {
+                clearInterval(sessionTimerInterval);
+                sessionTimeLeft = 70;
+                updateTimerUI();
+                
+                sessionTimerInterval = setInterval(function() {
+                    sessionTimeLeft--;
+                    updateTimerUI();
+                    
+                    if (sessionTimeLeft <= 0) {
+                        endSession();
+                    }
+                }, 1000);
+            }
+            
+            // Update timer UI
+            function updateTimerUI() {
+                const percentage = (sessionTimeLeft / 20) * 100;
+                timerBar.style.width = percentage + '%';
+                
+                // Change color based on time left
+                timerBar.classList.remove('warning', 'danger');
+                if (sessionTimeLeft <= 0) {
+                    timerBar.classList.add('danger');
+                    timerText.textContent = 'Sesi sudah berakhir';
+                }else if (sessionTimeLeft <= 5) {
+                    timerBar.classList.add('danger');
+                    timerText.textContent = 'Sesi akan berakhir';
+                } else if (sessionTimeLeft <= 10) {
+                    timerBar.classList.add('warning');
+                    timerText.textContent = 'Sesi aktif';
+                } else {
+                    timerText.textContent = 'Sesi aktif';
+                }
+            }
+            
+            // End session function
+            function endSession() {
+                clearInterval(sessionTimerInterval);
+                sessionActive = false;
+                
+                // Disable input
+                chatInput.disabled = true;
+                chatSend.disabled = true;
+                
+                // Add session ended message
+                const sessionEndedMessage = document.createElement('div');
+                sessionEndedMessage.className = 'session-ended-banner';
+                sessionEndedMessage.innerHTML = `
+                    <div class="session-ended-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="session-ended-content">
+                        <div class="session-ended-title">Sesi Berakhir</div>
+                        <div class="session-ended-subtitle">Sesi Anda telah berakhir karena tidak ada aktivitas selama 70 detik.</div>
+                    </div>
+                    <button class="restart-session-btn" onclick="restartSession()">
+                        <i class="fas fa-redo"></i> Mulai Sesi Baru
+                    </button>
+                `;
+                chatBody.appendChild(sessionEndedMessage);
+                
+                // Add system message
+                const systemMessage = document.createElement('div');
+                systemMessage.className = 'message system';
+                systemMessage.innerHTML = `
+                    <div class="message-content">Sesi telah berakhir. Klik "Mulai Sesi Baru" untuk melanjutkan percakapan.</div>
+                `;
+                chatBody.appendChild(systemMessage);
+                
+                // Scroll to bottom
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+            
+            // Restart session function
+            window.restartSession = function() {
+                sessionActive = true;
+                
+                // Enable input
+                chatInput.disabled = false;
+                chatSend.disabled = false;
+                
+                // Remove session ended banner
+                const sessionEndedBanner = document.querySelector('.session-ended-banner');
+                if (sessionEndedBanner) {
+                    sessionEndedBanner.remove();
+                }
+                
+                // Remove system message
+                const systemMessage = document.querySelector('.message.system');
+                if (systemMessage) {
+                    systemMessage.remove();
+                }
+                
+                // Add restart message
+                const restartMessage = document.createElement('div');
+                restartMessage.className = 'message bot';
+                restartMessage.innerHTML = `
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content-wrapper">
+                        <div class="message-content">Sesi baru telah dimulai. Ada yang bisa saya bantu?</div>
+                        <div class="message-time">Hari ini, ${formatTime(new Date())}</div>
+                    </div>
+                `;
+                chatBody.appendChild(restartMessage);
+                
+                // Scroll to bottom
+                chatBody.scrollTop = chatBody.scrollHeight;
+                
+                // Start session timer
+                startSessionTimer();
+                
+                // Focus on input
+                chatInput.focus();
+            };
+            
             // Check connection status
             function checkConnectionStatus() {
                 fetch('/ask', {
                     method: 'OPTIONS',
-                    timeout: 5000 // 5 seconds timeout
+                    timeout: 50000 // 5 seconds timeout
                 })
                 .then(response => {
                     if (response.ok) {
@@ -881,6 +1218,9 @@
             // Initial check
             checkConnectionStatus();
             
+            // Start session timer
+            startSessionTimer();
+            
             // Toggle chat popup
             chatButton.addEventListener('click', function() {
                 if (chatPopup.style.display === 'flex') {
@@ -895,10 +1235,62 @@
                 chatPopup.style.display = 'none';
             });
             
+            // Generate unique session ID
+            function generateSessionId() {
+                return Date.now().toString() + Math.random().toString(36).substr(2, 9);
+            }
+            
+            // Function to disable all clickable elements during processing
+            function disableAllClickableElements() {
+                // Disable sidebar feature items
+                const featureItems = document.querySelectorAll('.feature-item');
+                featureItems.forEach(item => {
+                    item.classList.add('disabled');
+                });
+                
+                // Disable quick action buttons in welcome banner
+                const quickActions = document.querySelectorAll('.quick-action');
+                quickActions.forEach(action => {
+                    action.classList.add('disabled');
+                });
+                
+                // Disable quick reply buttons
+                const quickReplies = document.querySelectorAll('.quick-reply');
+                quickReplies.forEach(reply => {
+                    reply.classList.add('disabled');
+                });
+            }
+            
+            // Function to enable all clickable elements after processing
+            function enableAllClickableElements() {
+                // Enable sidebar feature items
+                const featureItems = document.querySelectorAll('.feature-item');
+                featureItems.forEach(item => {
+                    item.classList.remove('disabled');
+                });
+                
+                // Enable quick action buttons in welcome banner
+                const quickActions = document.querySelectorAll('.quick-action');
+                quickActions.forEach(action => {
+                    action.classList.remove('disabled');
+                });
+                
+                // Enable quick reply buttons
+                const quickReplies = document.querySelectorAll('.quick-reply');
+                quickReplies.forEach(reply => {
+                    reply.classList.remove('disabled');
+                });
+            }
+            
             // Send message function for main chat
             function sendMainMessage() {
+                if (!sessionActive) return;
+                
                 const message = chatInput.value.trim();
                 if (message === '') return;
+                
+                // Generate session ID for this request
+                const sessionId = generateSessionId();
                 
                 // Add user message
                 const userMessage = document.createElement('div');
@@ -914,11 +1306,19 @@
                 `;
                 chatBody.appendChild(userMessage);
                 
-                // Clear input
+                // Clear input and disable it
                 chatInput.value = '';
+                chatInput.disabled = true;
+                chatSend.disabled = true;
+                
+                // Disable all clickable elements
+                disableAllClickableElements();
                 
                 // Scroll to bottom
                 chatBody.scrollTop = chatBody.scrollHeight;
+                
+                // Reset session timer
+                startSessionTimer();
                 
                 // Show typing indicator
                 typingIndicator.style.display = 'block';
@@ -930,38 +1330,24 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ message: message }),
+                    body: JSON.stringify({ 
+                        message: message,
+                        session_id: sessionId
+                    }),
                 })
                 .then(response => response.json())
                 .then(data => {
-                    // Hide typing indicator
-                    typingIndicator.style.display = 'none';
-                    
-                    // Add bot response
-                    const botMessage = document.createElement('div');
-                    botMessage.className = 'message bot';
-                    
-                    const botTime = new Date();
-                    // Konversi Markdown ke HTML menggunakan marked.js
-                    const formattedReply = marked.parse(data.reply);
-                    
-                    botMessage.innerHTML = `
-                        <div class="message-avatar">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="message-content-wrapper">
-                            <div class="message-content">${formattedReply}</div>
-                            <div class="message-time">Hari ini, ${formatTime(botTime)}</div>
-                        </div>
-                    `;
-                    chatBody.appendChild(botMessage);
-                    
-                    // Scroll to bottom
-                    chatBody.scrollTop = chatBody.scrollHeight;
+                    // Start polling for response
+                    pollForResponse(sessionId);
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     typingIndicator.style.display = 'none';
+                    chatInput.disabled = false;
+                    chatSend.disabled = false;
+                    
+                    // Re-enable all clickable elements
+                    enableAllClickableElements();
                     
                     // Add error message
                     const errorMessage = document.createElement('div');
@@ -984,6 +1370,108 @@
                 });
             }
             
+            // Poll for response function
+            function pollForResponse(sessionId) {
+                const maxAttempts = 30; // Maximum 30 attempts (15 seconds)
+                let attempts = 0;
+                
+                const checkResponse = () => {
+                    attempts++;
+                    
+                    fetch('/get_response', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ session_id: sessionId }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'completed') {
+                            // Hide typing indicator
+                            typingIndicator.style.display = 'none';
+                            
+                            // Add bot response
+                            const botMessage = document.createElement('div');
+                            botMessage.className = 'message bot';
+                            
+                            const botTime = new Date();
+                            // Konversi Markdown ke HTML menggunakan marked.js
+                            const formattedReply = marked.parse(data.reply);
+                            
+                            botMessage.innerHTML = `
+                                <div class="message-avatar">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="message-content-wrapper">
+                                    <div class="message-content">${formattedReply}</div>
+                                    <div class="message-time">Hari ini, ${formatTime(botTime)}</div>
+                                </div>
+                            `;
+                            chatBody.appendChild(botMessage);
+                            
+                            // Scroll to bottom
+                            chatBody.scrollTop = chatBody.scrollHeight;
+                            
+                            // Re-enable input
+                            chatInput.disabled = false;
+                            chatSend.disabled = false;
+                            chatInput.focus();
+                            
+                            // Re-enable all clickable elements
+                            enableAllClickableElements();
+                        } else if (data.status === 'processing' && attempts < maxAttempts) {
+                            // Still processing, check again after 3000ms
+                            setTimeout(checkResponse, 3000);
+                        } else {
+                            // Timeout or error
+                            typingIndicator.style.display = 'none';
+                            chatInput.disabled = false;
+                            chatSend.disabled = false;
+                            
+                            // Re-enable all clickable elements
+                            enableAllClickableElements();
+                            
+                            // Add timeout message
+                            const timeoutMessage = document.createElement('div');
+                            timeoutMessage.className = 'message bot';
+                            
+                            const timeoutTime = new Date();
+                            timeoutMessage.innerHTML = `
+                                <div class="message-avatar">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="message-content-wrapper">
+                                    <div class="message-content">Maaf, permintaan Anda memakan waktu terlalu lama. Silakan coba lagi.</div>
+                                    <div class="message-time">Hari ini, ${formatTime(timeoutTime)}</div>
+                                </div>
+                            `;
+                            chatBody.appendChild(timeoutMessage);
+                            
+                            // Scroll to bottom
+                            chatBody.scrollTop = chatBody.scrollHeight;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error polling response:', error);
+                        if (attempts < maxAttempts) {
+                            setTimeout(checkResponse, 50000);
+                        } else {
+                            // Max attempts reached
+                            typingIndicator.style.display = 'none';
+                            chatInput.disabled = false;
+                            chatSend.disabled = false;
+                            
+                            // Re-enable all clickable elements
+                            enableAllClickableElements();
+                        }
+                    });
+                };
+                
+                // Start polling
+                checkResponse();
+            }
+            
             // Send message on button click
             chatSend.addEventListener('click', sendMainMessage);
             
@@ -994,10 +1482,20 @@
                 }
             });
             
+            // Reset timer on input activity
+            chatInput.addEventListener('input', function() {
+                if (sessionActive) {
+                    startSessionTimer();
+                }
+            });
+            
             // Send message function for popup chat
             function sendPopupMessage() {
                 const message = popupChatInput.value.trim();
                 if (message === '') return;
+                
+                // Generate session ID for this request
+                const sessionId = generateSessionId();
                 
                 // Add user message
                 const userMessage = document.createElement('div');
@@ -1008,8 +1506,10 @@
                 `;
                 popupChatBody.appendChild(userMessage);
                 
-                // Clear input
+                // Clear input and disable it
                 popupChatInput.value = '';
+                popupChatInput.disabled = true;
+                popupChatSend.disabled = true;
                 
                 // Scroll to bottom
                 popupChatBody.scrollTop = popupChatBody.scrollHeight;
@@ -1020,29 +1520,20 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ message: message }),
+                    body: JSON.stringify({ 
+                        message: message,
+                        session_id: sessionId
+                    }),
                 })
                 .then(response => response.json())
                 .then(data => {
-                    // Add bot response
-                    const botMessage = document.createElement('div');
-                    botMessage.className = 'message bot';
-                    
-                    const botTime = new Date();
-                    // Konversi Markdown ke HTML menggunakan marked.js
-                    const formattedReply = marked.parse(data.reply);
-                    
-                    botMessage.innerHTML = `
-                        <div class="message-content">${formattedReply}</div>
-                        <div class="message-time">Hari ini, ${formatTime(botTime)}</div>
-                    `;
-                    popupChatBody.appendChild(botMessage);
-                    
-                    // Scroll to bottom
-                    popupChatBody.scrollTop = popupChatBody.scrollHeight;
+                    // Start polling for response
+                    pollForPopupResponse(sessionId);
                 })
                 .catch(error => {
                     console.error('Error:', error);
+                    popupChatInput.disabled = false;
+                    popupChatSend.disabled = false;
                     
                     // Add error message
                     const errorMessage = document.createElement('div');
@@ -1058,6 +1549,84 @@
                     // Scroll to bottom
                     popupChatBody.scrollTop = popupChatBody.scrollHeight;
                 });
+            }
+            
+            // Poll for popup response function
+            function pollForPopupResponse(sessionId) {
+                const maxAttempts = 30; // Maximum 30 attempts (15 seconds)
+                let attempts = 0;
+                
+                const checkResponse = () => {
+                    attempts++;
+                    
+                    fetch('/get_response', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ session_id: sessionId }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'completed') {
+                            // Add bot response
+                            const botMessage = document.createElement('div');
+                            botMessage.className = 'message bot';
+                            
+                            const botTime = new Date();
+                            // Konversi Markdown ke HTML menggunakan marked.js
+                            const formattedReply = marked.parse(data.reply);
+                            
+                            botMessage.innerHTML = `
+                                <div class="message-content">${formattedReply}</div>
+                                <div class="message-time">Hari ini, ${formatTime(botTime)}</div>
+                            `;
+                            popupChatBody.appendChild(botMessage);
+                            
+                            // Scroll to bottom
+                            popupChatBody.scrollTop = popupChatBody.scrollHeight;
+                            
+                            // Re-enable input
+                            popupChatInput.disabled = false;
+                            popupChatSend.disabled = false;
+                            popupChatInput.focus();
+                        } else if (data.status === 'processing' && attempts < maxAttempts) {
+                            // Still processing, check again after 3000ms
+                            setTimeout(checkResponse, 50000);
+                        } else {
+                            // Timeout or error
+                            popupChatInput.disabled = false;
+                            popupChatSend.disabled = false;
+                            
+                            // Add timeout message
+                            const timeoutMessage = document.createElement('div');
+                            timeoutMessage.className = 'message bot';
+                            
+                            const timeoutTime = new Date();
+                            timeoutMessage.innerHTML = `
+                                <div class="message-content">Maaf, permintaan Anda memakan waktu terlalu lama. Silakan coba lagi.</div>
+                                <div class="message-time">Hari ini, ${formatTime(timeoutTime)}</div>
+                            `;
+                            popupChatBody.appendChild(timeoutMessage);
+                            
+                            // Scroll to bottom
+                            popupChatBody.scrollTop = popupChatBody.scrollHeight;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error polling response:', error);
+                        if (attempts < maxAttempts) {
+                            setTimeout(checkResponse, 50000);
+                        } else {
+                            // Max attempts reached
+                            popupChatInput.disabled = false;
+                            popupChatSend.disabled = false;
+                        }
+                    });
+                };
+                
+                // Start polling
+                checkResponse();
             }
             
             // Send message on button click for popup
@@ -1079,16 +1648,49 @@
                         msg.remove();
                     }
                 });
+                
+                // Remove session ended banner if exists
+                const sessionEndedBanner = document.querySelector('.session-ended-banner');
+                if (sessionEndedBanner) {
+                    sessionEndedBanner.remove();
+                }
+                
+                // Remove system message if exists
+                const systemMessage = document.querySelector('.message.system');
+                if (systemMessage) {
+                    systemMessage.remove();
+                }
+                
+                // Restart session if it was ended
+                if (!sessionActive) {
+                    restartSession();
+                }
             };
             
             // Send quick message from sidebar
             window.sendQuickMessage = function(message) {
+                if (!sessionActive) return;
+                
+                // Check if any element is disabled (processing)
+                const disabledElements = document.querySelectorAll('.disabled');
+                if (disabledElements.length > 0) {
+                    return; // Don't send message if processing
+                }
+                
                 chatInput.value = message;
                 sendMainMessage();
             };
             
             // Send quick reply
             window.sendQuickReply = function(text) {
+                if (!sessionActive) return;
+                
+                // Check if any element is disabled (processing)
+                const disabledElements = document.querySelectorAll('.disabled');
+                if (disabledElements.length > 0) {
+                    return; // Don't send message if processing
+                }
+                
                 chatInput.value = text;
                 sendMainMessage();
             };
