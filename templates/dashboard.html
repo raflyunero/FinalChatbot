@@ -12,6 +12,7 @@
     <h1>📊 Dashboard Admin</h1>
     <nav>
       <a href="{{ url_for('admin') }}">Dashboard</a>
+      <a href="{{ url_for('riwayat_chat') }}">Riwayat Chat</a>
       <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
     </nav>
   </header>
@@ -62,6 +63,15 @@
           <p class="stat-value">{{ now.strftime("%d %B %Y") }}</p>
         </div>
       </div>
+    </div>
+
+    <!-- Riwayat Chat Shortcut -->
+    <div class="card mb-8">
+      <h2 class="card-title">🕒 Riwayat Chat Pengguna</h2>
+      <p>Lihat semua percakapan pengguna dengan chatbot secara detail.</p>
+      <a href="{{ url_for('riwayat_chat') }}" class="btn-primary" style="display:inline-block; margin-top:10px;">
+        <i class="fa-solid fa-clock-rotate-left"></i> Buka Riwayat Chat
+      </a>
     </div>
 
     <!-- Daftar Dosen -->
